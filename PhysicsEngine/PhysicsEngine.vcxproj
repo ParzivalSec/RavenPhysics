@@ -145,11 +145,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnchoredSpring.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="FreeList.cpp" />
+    <ClCompile Include="GravityForceGenerator.cpp" />
+    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="SpringJoint.cpp" />
+    <ClCompile Include="WindForceGenerator.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnchoredSpring.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="FreeList.h" />
+    <ClInclude Include="GravityForceGenerator.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="PackedArray.h" />
+    <ClInclude Include="SpringJoint.h" />
+    <ClInclude Include="WindForceGenerator.h" />
+    <ClInclude Include="World.h" />
+    <ClInclude Include="WorldConfiguration.h" />
+    <ClInclude Include="WorldRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

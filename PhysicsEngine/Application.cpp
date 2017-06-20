@@ -1,6 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Clock.h"
+#include "PackedArray.h"
+#include "Particle.h"
+#include "WorldRenderer.h"
+#include "World.h"
+#include "WorldConfiguration.h"
 
 int main()
 {
@@ -18,6 +23,16 @@ int main()
 
 	float currentTime = clock.GetElapsedTime().count();
 	float accumulator = 0.0f;
+
+	raven::WorldRenderer rednerer(window);
+
+	raven::WorldConfiguration worldConfig;
+	worldConfig.maxParticles = 100000;
+	worldConfig.gravitation = { 0.0f, 0.005f };
+
+	raven::World world(worldConfig);
+	world.AddParticle({ 100, 100 }, BODY);
+	world.AddParticle({ 200, 200 }, BODY);
 
 	while (window.isOpen())
 	{
@@ -49,20 +64,23 @@ int main()
 		while (accumulator >= dt)
 		{
 			// Update physic world
+			world.Step(dt);
 			t += dt;
 			accumulator -= dt;
 		}
-
-		// Here we should apply the interpolations tep of the game loop
-		//const double alpha = accumulator / dt;
-
-		//State state = currentState * alpha +
-			//previousState * (1.0 - alpha);
 
 		 /*
 		 * Render part of the game loop
 		 */
 		window.clear(sf::Color::White);
+
+		const raven::core::PackedArray<raven::Particle, 1000>& parti = world.GetParticles();
+
+		for (size_t i = 0; i < parti.Size(); i++)
+		{
+			raven::Particle p = parti[i];
+			rednerer.DrawSphere(p.position, sf::Color::Red, 10.0f);
+		}
 
 		window.display();
 	}

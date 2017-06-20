@@ -14,6 +14,42 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{a2ca13ec-489b-4063-bf87-e646aee4c18d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Bodies">
+      <UniqueIdentifier>{c997b92b-e5c1-46aa-ad85-cd7eb983091a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Integrators">
+      <UniqueIdentifier>{cbc27602-aacf-4496-a509-361d6d9d121a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ForceGenerators">
+      <UniqueIdentifier>{ccd76267-9164-4243-87ef-475f0c67dfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\World">
+      <UniqueIdentifier>{abf096f9-075f-4725-9527-f2720251a2e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ForceGenerators\Wind">
+      <UniqueIdentifier>{d3506f4e-a88f-4805-bf66-51eeeda9e4c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ForceGenerators\Springs">
+      <UniqueIdentifier>{b85c24b1-ae95-472f-bda3-9673f424ccd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{8f32112b-d41f-4192-8350-ea6039cd53f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Datastructures">
+      <UniqueIdentifier>{ae87940a-0f38-4a7f-b941-5b24e48b4479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Datastructures\FreeList">
+      <UniqueIdentifier>{8ae0c6bc-af14-4860-9428-a18a54996b5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer">
+      <UniqueIdentifier>{bf98be64-fc91-4626-90af-80de78cfd820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Datastructures\PackedArray">
+      <UniqueIdentifier>{e44ddb62-3470-460c-9bd8-8f98a6faa7a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ForceGenerators\Gravity">
+      <UniqueIdentifier>{5c4f9172-e7f8-4fd9-8862-92f888107347}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -22,10 +58,64 @@
     <ClCompile Include="Clock.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Engine\Bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="WindForceGenerator.cpp">
+      <Filter>Engine\ForceGenerators\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="SpringJoint.cpp">
+      <Filter>Engine\ForceGenerators\Springs</Filter>
+    </ClCompile>
+    <ClCompile Include="AnchoredSpring.cpp">
+      <Filter>Engine\ForceGenerators\Springs</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeList.cpp">
+      <Filter>Engine\Core\Datastructures\FreeList</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldRenderer.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityForceGenerator.cpp">
+      <Filter>Engine\ForceGenerators\Gravity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h">
       <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Engine\Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldConfiguration.h">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="WindForceGenerator.h">
+      <Filter>Engine\ForceGenerators\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringJoint.h">
+      <Filter>Engine\ForceGenerators\Springs</Filter>
+    </ClInclude>
+    <ClInclude Include="AnchoredSpring.h">
+      <Filter>Engine\ForceGenerators\Springs</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeList.h">
+      <Filter>Engine\Core\Datastructures\FreeList</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldRenderer.h">
+      <Filter>Engine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="PackedArray.h">
+      <Filter>Engine\Core\Datastructures\PackedArray</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h">
+      <Filter>Engine\ForceGenerators\Gravity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
