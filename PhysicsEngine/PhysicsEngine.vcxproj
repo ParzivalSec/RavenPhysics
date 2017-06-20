@@ -146,23 +146,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="FanForceGenerator.cpp" />
-    <ClCompile Include="GravitationForceGenerator.cpp" />
-    <ClCompile Include="Integrators.cpp" />
-    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="ParticleForceRegistry.cpp" />
-    <ClCompile Include="ParticleSpring.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FanForceGenerator.h" />
-    <ClInclude Include="GravitationForceGenerator.h" />
-    <ClInclude Include="Integrators.h" />
-    <ClInclude Include="Particle.h" />
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="ParticleForceGenerator.h" />
-    <ClInclude Include="ParticleForceRegistry.h" />
-    <ClInclude Include="ParticleSpring.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

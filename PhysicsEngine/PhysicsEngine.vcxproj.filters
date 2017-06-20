@@ -11,75 +11,21 @@
     <Filter Include="PHS_Application">
       <UniqueIdentifier>{ef97f234-09b8-4e3f-b389-f1911329aa86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Bodies">
-      <UniqueIdentifier>{1dfb91cc-de44-46d3-8ad7-b42806a7b094}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Integrator">
-      <UniqueIdentifier>{40109f4b-81b6-4a19-9a88-0b11b5fda122}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ForceGenerators">
-      <UniqueIdentifier>{21e83a1b-6f11-4309-a5c9-7a7fa4ad578a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Time">
-      <UniqueIdentifier>{32e327cd-27d3-4116-b6d2-7d5070b1e741}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ForceGenerators\FanForceGenerator">
-      <UniqueIdentifier>{93147904-8c37-42fd-9f3e-9bdcbd46971f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ForceGenerators\Springs">
-      <UniqueIdentifier>{22e2faad-1b89-4bf5-aa95-fda3746e45ed}</UniqueIdentifier>
+      <UniqueIdentifier>{a2ca13ec-489b-4063-bf87-e646aee4c18d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
       <Filter>PHS_Application</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Engine\Bodies</Filter>
-    </ClCompile>
-    <ClCompile Include="Integrators.cpp">
-      <Filter>Engine\Integrator</Filter>
-    </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>Engine\ForceGenerators</Filter>
-    </ClCompile>
-    <ClCompile Include="FanForceGenerator.cpp">
-      <Filter>Engine\ForceGenerators\FanForceGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSpring.cpp">
-      <Filter>Engine\ForceGenerators\Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="GravitationForceGenerator.cpp">
-      <Filter>Engine\ForceGenerators</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Particle.h">
-      <Filter>Engine\Bodies</Filter>
-    </ClInclude>
-    <ClInclude Include="Integrators.h">
-      <Filter>Engine\Integrator</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>Engine\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>Engine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Engine\ForceGenerators</Filter>
-    </ClInclude>
-    <ClInclude Include="FanForceGenerator.h">
-      <Filter>Engine\ForceGenerators\FanForceGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSpring.h">
-      <Filter>Engine\ForceGenerators\Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="GravitationForceGenerator.h">
-      <Filter>Engine\ForceGenerators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
