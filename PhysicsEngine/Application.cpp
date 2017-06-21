@@ -6,6 +6,7 @@
 #include "WorldRenderer.h"
 #include "World.h"
 #include "WorldConfiguration.h"
+#include <iostream>
 
 int main()
 {
@@ -16,7 +17,7 @@ int main()
 	 * Setup variables needed for the Semi-Fixed timestep loop wiht interpolation
 	 */
 	float t = 0.0f;
-	float dt = 0.0016f;
+	float dt = 0.016f;
 
 	raven::Clock clock;
 	clock.Start();
@@ -28,11 +29,14 @@ int main()
 
 	raven::WorldConfiguration worldConfig;
 	worldConfig.maxParticles = 100000;
-	worldConfig.gravitation = { 0.0f, 0.005f };
+	worldConfig.gravitation = { 0.0f, 9.81f };
 
 	raven::World world(worldConfig);
-	world.AddParticle({ 100, 100 }, BODY);
-	world.AddParticle({ 200, 200 }, BODY);
+	raven::core::ResourceID one = world.AddParticle({ 100, 100 }, BODY);
+	raven::core::ResourceID two = world.AddParticle({ 100, 200 }, BODY);
+	
+	world.AddAnchoredSpring(one, glm::vec2(100, 80), 1.0f, 5.0f);
+	world.AddSpringJoint(one, two, 0.5f, 100.0f);
 
 	while (window.isOpen())
 	{
@@ -47,10 +51,10 @@ int main()
 				window.close();
 			}
 		}
-
 		float newTime = clock.GetElapsedTime().count();
 		float frameTime = newTime - currentTime;
-		if (frameTime < 0.25f)
+
+		if (frameTime > 0.25f)
 		{
 			frameTime = 0.25f;
 		}
@@ -63,12 +67,12 @@ int main()
 		 */
 		while (accumulator >= dt)
 		{
+
 			// Update physic world
 			world.Step(dt);
 			t += dt;
 			accumulator -= dt;
 		}
-
 		 /*
 		 * Render part of the game loop
 		 */

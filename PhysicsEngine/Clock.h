@@ -10,7 +10,7 @@ namespace raven
 	{
 	public:
 		void Start(void);
-		const duration<float>& GetElapsedTime(void) const;
+		const duration<float> GetElapsedTime(void) const;
 
 		high_resolution_clock::time_point CurrentTime();
 

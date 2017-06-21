@@ -30,6 +30,16 @@ core::ResourceID World::AddParticle(glm::vec2 position, glm::vec2 acceleration, 
 	return newParticle;
 }
 
+void World::AddAnchoredSpring(core::ResourceID particle, const glm::vec2& anchor, float springC, float restL)
+{
+	m_anchoredSprings.push_back({anchor, particle, springC, restL});
+}
+
+void World::AddSpringJoint(core::ResourceID particleOne, core::ResourceID particleTwo, float springC, float restL)
+{
+	m_springJoints.push_back({ particleOne, particleTwo, springC, restL });
+}
+
 void World::Step(float deltaTime)
 {
 	for(size_t i = 0; i < m_particles.Size(); i++)
@@ -38,6 +48,16 @@ void World::Step(float deltaTime)
 
 		// Apply gravity
 		m_gravity.ApplyForceTo(particle);
+		
+		for (size_t s = 0; s < m_springJoints.size(); s++)
+		{
+			m_springJoints[s].UpdateForce(deltaTime, *this);
+		}
+
+		for (size_t s = 0; s < m_anchoredSprings.size(); s++)
+		{
+			m_anchoredSprings[s].UpdateForce(deltaTime, *this);
+		}
 
 		Integrate(particle, deltaTime);
 	}
