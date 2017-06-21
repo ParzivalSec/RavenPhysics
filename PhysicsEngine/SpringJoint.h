@@ -14,6 +14,8 @@ namespace raven
 
 		void AddParticle(core::ResourceID particle);
 
+		core::ResourceID GetParticle(uint32_t index) { return m_particles[index]; }
+
 		void UpdateForce(float deltaTime, World& world);
 
 	private:

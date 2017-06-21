@@ -35,6 +35,11 @@ void World::AddAnchoredSpring(core::ResourceID particle, const glm::vec2& anchor
 	m_anchoredSprings.push_back({anchor, particle, springC, restL});
 }
 
+void World::AddWindForceGenerator(const glm::vec2& position, const glm::vec2& direction, float windStrength)
+{
+	m_windForceGenerator.push_back({position, direction, windStrength});
+}
+
 void World::AddSpringJoint(core::ResourceID particleOne, core::ResourceID particleTwo, float springC, float restL)
 {
 	m_springJoints.push_back({ particleOne, particleTwo, springC, restL });
@@ -42,21 +47,26 @@ void World::AddSpringJoint(core::ResourceID particleOne, core::ResourceID partic
 
 void World::Step(float deltaTime)
 {
+	for (size_t s = 0; s < m_springJoints.size(); s++)
+	{
+		m_springJoints[s].UpdateForce(deltaTime, *this);
+	}
+
+	for (size_t s = 0; s < m_anchoredSprings.size(); s++)
+	{
+		m_anchoredSprings[s].UpdateForce(deltaTime, *this);
+	}
+
 	for(size_t i = 0; i < m_particles.Size(); i++)
 	{
 		Particle& particle = m_particles[i];
 
 		// Apply gravity
 		m_gravity.ApplyForceTo(particle);
-		
-		for (size_t s = 0; s < m_springJoints.size(); s++)
-		{
-			m_springJoints[s].UpdateForce(deltaTime, *this);
-		}
 
-		for (size_t s = 0; s < m_anchoredSprings.size(); s++)
+		for (size_t s = 0; s < m_windForceGenerator.size(); s++)
 		{
-			m_anchoredSprings[s].UpdateForce(deltaTime, *this);
+			m_windForceGenerator[s].UpdateForce(deltaTime, &particle);
 		}
 
 		Integrate(particle, deltaTime);

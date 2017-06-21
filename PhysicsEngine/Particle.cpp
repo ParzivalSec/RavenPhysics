@@ -9,7 +9,7 @@ Particle::Particle()
 	, acceleration({ 0, 0 })
 	, forceAccumulator({ 0, 0 })
 	, inverseMass(1.0f)
-	, damping(0.99f)
+	, damping(0.4)
 {}
 
 Particle::Particle(glm::vec2 position)
@@ -19,7 +19,7 @@ Particle::Particle(glm::vec2 position)
 	, acceleration({ 0, 0 })
 	, forceAccumulator({ 0, 0 })
 	, inverseMass(1.0f)
-	, damping(0.99f)
+	, damping(0.4)
 {}
 
 Particle::Particle(glm::vec2 position, TYPE type) 
@@ -29,7 +29,7 @@ Particle::Particle(glm::vec2 position, TYPE type)
 	, acceleration({ 0, 0 })
 	, forceAccumulator({ 0, 0 })
 	, inverseMass(1.0f)
-	, damping(0.99f)
+	, damping(0.4)
 {}
 
 Particle::Particle(glm::vec2 position, glm::vec2 velocity, TYPE type)
@@ -40,5 +40,5 @@ Particle::Particle(glm::vec2 position, glm::vec2 velocity, TYPE type)
 	, acceleration({ 0, 0 })
 	, forceAccumulator({ 0, 0 })
 	, inverseMass(1.0f)
-	, damping(0.99f)
+	, damping(0.4)
 {}

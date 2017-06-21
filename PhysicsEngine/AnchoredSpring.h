@@ -16,6 +16,9 @@ namespace raven
 		void AddParticle(core::ResourceID particle);
 		void SetAnchor(const glm::vec2 anchor);
 
+		const glm::vec2& GetAnchor(void) const { return m_anchor; }
+		core::ResourceID GetParticle(void) const { return m_particle; }
+
 		void UpdateForce(float deltaTime, World& world);
 
 	private:

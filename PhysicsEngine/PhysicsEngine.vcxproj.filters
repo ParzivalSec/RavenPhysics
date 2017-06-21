@@ -50,6 +50,18 @@
     <Filter Include="Engine\ForceGenerators\Gravity">
       <UniqueIdentifier>{5c4f9172-e7f8-4fd9-8862-92f888107347}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Scenery">
+      <UniqueIdentifier>{fba93aa3-f7e2-45da-8870-af387bf13586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\BoundingVolumes">
+      <UniqueIdentifier>{e4c3a592-8181-41b9-bc07-75fbefab106b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PHS_Application\CustomProps">
+      <UniqueIdentifier>{6e3442cf-6741-4afd-af38-8d3452e58e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PHS_Application\CustomProps\Blizzard">
+      <UniqueIdentifier>{ba0cd6f7-83df-44d3-bffb-20a7e9d5c26a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -81,6 +93,12 @@
     </ClCompile>
     <ClCompile Include="GravityForceGenerator.cpp">
       <Filter>Engine\ForceGenerators\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticBox.cpp">
+      <Filter>Engine\Scenery</Filter>
+    </ClCompile>
+    <ClCompile Include="Blizzard.cpp">
+      <Filter>PHS_Application\CustomProps\Blizzard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +134,21 @@
     </ClInclude>
     <ClInclude Include="GravityForceGenerator.h">
       <Filter>Engine\ForceGenerators\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Engine\Core\BoundingVolumes</Filter>
+    </ClInclude>
+    <ClInclude Include="OOBB.h">
+      <Filter>Engine\Core\BoundingVolumes</Filter>
+    </ClInclude>
+    <ClInclude Include="BoudingCircle.h">
+      <Filter>Engine\Core\BoundingVolumes</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticBox.h">
+      <Filter>Engine\Scenery</Filter>
+    </ClInclude>
+    <ClInclude Include="Blizzard.h">
+      <Filter>PHS_Application\CustomProps\Blizzard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
