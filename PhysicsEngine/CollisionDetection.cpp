@@ -8,7 +8,11 @@
 
 bool raven::coll::PointCircle(Manifold& m)
 {
-	return false;
+	Particle& A = m.A;
+	Particle& B = m.B;
+
+	float dist = glm::length(B.position - A.position);
+	return dist <= A.radius;
 }
 
 bool raven::coll::CircleCicle(Manifold& m)
@@ -72,17 +76,18 @@ bool raven::coll::CircleOOBB(SceneryManifold& m)
 
 	// Calculate inverseTransform of OOBB
 	glm::mat3 oobbTrans(1.0f);
-	oobbTrans = glm::translate(oobbTrans, B.center);
 	oobbTrans = glm::rotate(oobbTrans, glm::radians(m.B.GetRotation()));
+	oobbTrans = glm::translate(oobbTrans, B.center);
 
 	glm::mat3 invBoxMatrix = glm::inverse(oobbTrans);
 	glm::vec2 transformedCircleCenter = invBoxMatrix * glm::vec3(A.position, 1.0f);
+	glm::vec2 transformedBoxCenter = invBoxMatrix * glm::vec3(B.center, 1.0f);
 
-	glm::vec2 centerDist = transformedCircleCenter - B.center;
+	glm::vec2 centerDist = transformedCircleCenter - transformedBoxCenter;
 	centerDist.x = glm::clamp(centerDist.x, -B.w_h_halfExtend.x, B.w_h_halfExtend.x);
 	centerDist.y = glm::clamp(centerDist.y, -B.w_h_halfExtend.y, B.w_h_halfExtend.y);
 
-	glm::vec2 closestPoint = B.center + centerDist;
+	glm::vec2 closestPoint = transformedBoxCenter + centerDist;
 	float dist = glm::length(closestPoint - transformedCircleCenter);
 
 	if (dist > A.radius)

@@ -8,6 +8,7 @@
 #include "WorldConfiguration.h"
 #include "StaticBox.h"
 #include "Blizzard.h"
+#include <iostream>
 
 int main()
 {
@@ -32,7 +33,7 @@ int main()
 	raven::WorldConfiguration worldConfig;
 	worldConfig.maxParticles = 100000;
 	worldConfig.gravitation = { 0.0f, 9.81f };
-	worldConfig.collisionIterations = 15;
+	worldConfig.collisionIterations = 5;
 
 	raven::World world(worldConfig);
 	raven::core::ResourceID one = world.AddParticle({ 100, 100 }, BODY);
@@ -80,10 +81,30 @@ int main()
 	world.AddSpringJoint(seven, eight, 1.0f, restLength);
 	world.AddSpringJoint(eight, nine, 1.0f, restLength);
 
-	world.AddStaticBox({ 500, 600 }, { 800, 50 }, 30);
-	world.AddStaticBox({ 800, 600 }, { 50, 800 }, 0);
+	world.AddStaticBox({ 300, 600 }, { 800, 50 }, 30);
+	world.AddStaticBox({ 600, 710 }, { 1600, 25 }, 0);
 
-	Blizzard bliz({500, 500}, 80.0f, 0.25f, world);
+	eleven = world.AddParticle({ 800, 500 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	eleven = world.AddParticle({ 780, 500 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	eleven = world.AddParticle({ 820, 500 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	eleven = world.AddParticle({ 790, 600 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	eleven = world.AddParticle({ 820, 500 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+
+	eleven = world.AddParticle({ 0, 50 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	world.GetParticles().Lookup(eleven)->velocity = { 200.0f, 0 };
+
+	world.AddStaticBox({ 800, 410 }, { 200, 25 }, 0);
+	world.AddStaticBox({ 675, 710 }, { 25, 300 }, 0);
+	world.AddStaticBox({ 925, 710 }, { 25, 300 }, 0);
+
+	Blizzard bliz({500, 200}, 300.0f, 0.1f, world);
+	Blizzard bliz2({800, 100}, 300.0f, 0.1f, world);
 
 	while (window.isOpen())
 	{
@@ -110,6 +131,7 @@ int main()
 		accumulator += frameTime;
 
 		bliz.Update(frameTime);
+		bliz2.Update(frameTime);
 
 		/**
 		 * Update part of the game loop
@@ -127,9 +149,11 @@ int main()
 		 */
 		window.clear(sf::Color::Black);
 
-		raven::core::PackedArray<raven::Particle, 1000>& parti = world.GetParticles();
+		raven::core::PackedArray<raven::Particle, 5000>& parti = world.GetParticles();
 
-		std::vector<raven::StaticBox> scenery = world.GetScenery();
+		std::cout << parti.Size() << std::endl;
+
+		std::vector<raven::StaticBox>& scenery = world.GetScenery();
 		for (size_t i = 0; i < scenery.size(); i++)
 		{
 			raven::StaticBox& box = scenery[i];
@@ -148,7 +172,7 @@ int main()
 			rednerer.DrawBox(p1, p2, p3, p4, sf::Color::Green, false);
 		}
 
-		std::vector<raven::SpringJoint> springs = world.GetSpringJoints();
+		std::vector<raven::SpringJoint>& springs = world.GetSpringJoints();
 		for (size_t i = 0; i < springs.size(); i++)
 		{
 			raven::SpringJoint& spring = springs[i];
@@ -158,7 +182,7 @@ int main()
 			rednerer.DrawLine(p1->position, p2->position, sf::Color::Red);
 		}
 
-		std::vector<raven::AnchoredSpring> anchoredSprings = world.GetAnchoredSprings();
+		std::vector<raven::AnchoredSpring>& anchoredSprings = world.GetAnchoredSprings();
 		for (size_t i = 0; i < anchoredSprings.size(); i++)
 		{
 			raven::AnchoredSpring& spring = anchoredSprings[i];

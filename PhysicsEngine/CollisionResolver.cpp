@@ -31,6 +31,7 @@ void coll::ResolveCollision(Manifold& m)
 void coll::ResolveStaticCollision(SceneryManifold& m)
 {
 	float normStr = m.collisioNormal.x * m.A.velocity.x + m.collisioNormal.y * m.A.velocity.y;
+
 	glm::vec2 velNormal = m.collisioNormal * normStr;
 	m.A.velocity -= 2.0f * velNormal;
 }

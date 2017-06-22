@@ -22,6 +22,7 @@ core::ResourceID World::AddParticle(glm::vec2 position, TYPE type)
 	realParticle->position = position;
 	realParticle->type = type;
 
+	m_particleHandles.push_back(newParticle);
 	return newParticle;
 }
 
@@ -83,6 +84,26 @@ void World::Step(float deltaTime)
 	}
 
 	ResolveCollisions();
+	CheckLifetime(deltaTime);
+}
+
+void World::CheckLifetime(float deltaTime)
+{
+	for (size_t i = 0; i < m_particleHandles.size(); i++)
+	{
+		Particle* particle = m_particles.Lookup(m_particleHandles[i]);
+
+		if (particle->lifeTime <= 0.0f)
+		{
+			m_particles.Remove(m_particleHandles[i]);
+			m_particleHandles.erase(m_particleHandles.begin() + i);
+		}
+
+		if (particle->type == PARTICLE)
+		{
+			particle->lifeTime -= deltaTime;
+		}
+	}
 }
 
 void World::ResolveCollisions()
@@ -111,6 +132,18 @@ void World::ResolveCollisions()
 					if (coll::CircleCicle(manifold))
 					{
 						manifolds.push_back(manifold);
+					}
+				}
+				else
+				{
+					Particle& part = m_particles[i].type == PARTICLE ? m_particles[i] : m_particles[j];
+					Particle& body = m_particles[j].type == BODY ? m_particles[j] : m_particles[i];
+
+					Manifold manifold(part, body);
+
+					if (coll::PointCircle(manifold))
+					{
+						
 					}
 				}
 			}

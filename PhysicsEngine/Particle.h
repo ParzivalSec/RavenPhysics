@@ -8,6 +8,13 @@ enum TYPE
 	BODY
 };
 
+enum SIMULATION_STATE
+{
+	ACTIVE,
+	GROUNDED,
+	INACTIVE
+};
+
 namespace raven
 {
 	class Particle
@@ -20,6 +27,7 @@ namespace raven
 
 		void SetMass(float newMass) { inverseMass = 1.0f / newMass; }
 
+		SIMULATION_STATE state;
 		TYPE type;
 		glm::vec2 position;
 		glm::vec2 prevPosition;

@@ -25,22 +25,24 @@ namespace raven
 		void AddWindForceGenerator(const glm::vec2& position, const glm::vec2& direction, float windStrength);
 		void AddStaticBox(const glm::vec2& position, const glm::vec2& extend, float rotation);
 
-		core::PackedArray<Particle, 1000>& GetParticles(void) { return m_particles; }
+		core::PackedArray<Particle, 5000>& GetParticles(void) { return m_particles; }
 		std::vector<SpringJoint>& GetSpringJoints(void) { return m_springJoints; }
 		std::vector<AnchoredSpring>& GetAnchoredSprings(void) { return m_anchoredSprings; }
 		std::vector<StaticBox>& GetScenery(void) { return m_scenery; }
 
 		void Step(float deltaTime);
-		void ResolveCollisions(void);
 
 	protected:
 
+		void CheckLifetime(float deltaTime);
+		void ResolveCollisions(void);
 		void Integrate(Particle& particle, float deltaTime);
 
 	private:
 		const WorldConfiguration& m_worldConfiguration;
 	
-		core::PackedArray<Particle, 1000> m_particles;
+		core::PackedArray<Particle, 5000> m_particles;
+		std::vector<core::ResourceID> m_particleHandles;
 
 		std::vector<SpringJoint> m_springJoints;
 		std::vector<AnchoredSpring> m_anchoredSprings;
