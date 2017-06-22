@@ -149,6 +149,8 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Blizzard.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="CollisionResolver.cpp" />
     <ClCompile Include="FreeList.cpp" />
     <ClCompile Include="GravityForceGenerator.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -164,11 +166,15 @@
     <ClInclude Include="Blizzard.h" />
     <ClInclude Include="BoudingCircle.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="CollisionResolver.h" />
     <ClInclude Include="FreeList.h" />
     <ClInclude Include="GravityForceGenerator.h" />
+    <ClInclude Include="Manifold.h" />
     <ClInclude Include="OOBB.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="PackedArray.h" />
+    <ClInclude Include="ScenereyManifold.h" />
     <ClInclude Include="SpringJoint.h" />
     <ClInclude Include="StaticBox.h" />
     <ClInclude Include="WindForceGenerator.h" />

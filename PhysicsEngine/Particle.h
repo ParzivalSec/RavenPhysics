@@ -28,6 +28,8 @@ namespace raven
 		glm::vec2 forceAccumulator;
 		float inverseMass;
 		float damping;
-
+		float lifeTime;
+		float restitution;
+		float radius;
 	};
 }

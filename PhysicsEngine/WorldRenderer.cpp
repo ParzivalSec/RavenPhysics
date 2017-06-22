@@ -110,3 +110,17 @@ void WorldRenderer::DrawLine(const glm::vec2& pointA, const glm::vec2& pointB, c
 
 	m_renderWindow.draw(vertexArray);
 }
+
+void WorldRenderer::DrawPoint(const glm::vec2& point, const sf::Color& color)
+{
+	static sf::VertexArray vertexArray(sf::Points);
+	static sf::Vertex vertex;
+
+	vertexArray.clear();
+
+	vertex.position = { point.x, point.y };
+	vertex.color = color;
+
+	vertexArray.append(vertex);
+	m_renderWindow.draw(vertexArray);
+}

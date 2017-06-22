@@ -62,6 +62,18 @@
     <Filter Include="PHS_Application\CustomProps\Blizzard">
       <UniqueIdentifier>{ba0cd6f7-83df-44d3-bffb-20a7e9d5c26a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Collisions">
+      <UniqueIdentifier>{e5a52039-99b9-40ce-877b-999da1450d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Collisions\Manifold">
+      <UniqueIdentifier>{36c654ae-ad00-4262-9e1c-116e0872325a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Collisions\CollisionDetection">
+      <UniqueIdentifier>{b072bda0-faa2-4ec3-909d-d56ac889f2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Collisions\CollisionResolution">
+      <UniqueIdentifier>{108e15b0-72df-494a-b59c-54f143296355}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -99,6 +111,12 @@
     </ClCompile>
     <ClCompile Include="Blizzard.cpp">
       <Filter>PHS_Application\CustomProps\Blizzard</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetection.cpp">
+      <Filter>Engine\Collisions\CollisionDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionResolver.cpp">
+      <Filter>Engine\Collisions\CollisionResolution</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +167,18 @@
     </ClInclude>
     <ClInclude Include="Blizzard.h">
       <Filter>PHS_Application\CustomProps\Blizzard</Filter>
+    </ClInclude>
+    <ClInclude Include="Manifold.h">
+      <Filter>Engine\Collisions\Manifold</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetection.h">
+      <Filter>Engine\Collisions\CollisionDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenereyManifold.h">
+      <Filter>Engine\Collisions\Manifold</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionResolver.h">
+      <Filter>Engine\Collisions\CollisionResolution</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

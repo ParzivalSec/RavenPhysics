@@ -7,6 +7,7 @@
 #include "SpringJoint.h"
 #include "AnchoredSpring.h"
 #include "WindForceGenerator.h"
+#include "StaticBox.h"
 
 namespace raven
 {
@@ -22,12 +23,15 @@ namespace raven
 		void AddSpringJoint(core::ResourceID particleOne, core::ResourceID particleTwo, float springC, float restL);
 		void AddAnchoredSpring(core::ResourceID particle, const glm::vec2& anchor, float springC, float restL);
 		void AddWindForceGenerator(const glm::vec2& position, const glm::vec2& direction, float windStrength);
+		void AddStaticBox(const glm::vec2& position, const glm::vec2& extend, float rotation);
 
 		core::PackedArray<Particle, 1000>& GetParticles(void) { return m_particles; }
 		std::vector<SpringJoint>& GetSpringJoints(void) { return m_springJoints; }
 		std::vector<AnchoredSpring>& GetAnchoredSprings(void) { return m_anchoredSprings; }
+		std::vector<StaticBox>& GetScenery(void) { return m_scenery; }
 
 		void Step(float deltaTime);
+		void ResolveCollisions(void);
 
 	protected:
 
@@ -41,6 +45,7 @@ namespace raven
 		std::vector<SpringJoint> m_springJoints;
 		std::vector<AnchoredSpring> m_anchoredSprings;
 		std::vector<WindForceGenerator> m_windForceGenerator;
+		std::vector<StaticBox> m_scenery;
 
 		GravityForceGenerator m_gravity;
 	};

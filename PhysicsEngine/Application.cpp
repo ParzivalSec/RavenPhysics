@@ -7,6 +7,7 @@
 #include "World.h"
 #include "WorldConfiguration.h"
 #include "StaticBox.h"
+#include "Blizzard.h"
 
 int main()
 {
@@ -31,6 +32,7 @@ int main()
 	raven::WorldConfiguration worldConfig;
 	worldConfig.maxParticles = 100000;
 	worldConfig.gravitation = { 0.0f, 9.81f };
+	worldConfig.collisionIterations = 15;
 
 	raven::World world(worldConfig);
 	raven::core::ResourceID one = world.AddParticle({ 100, 100 }, BODY);
@@ -42,6 +44,19 @@ int main()
 	raven::core::ResourceID seven = world.AddParticle({ 100, 200 }, BODY);
 	raven::core::ResourceID eight = world.AddParticle({ 150, 200 }, BODY);
 	raven::core::ResourceID nine = world.AddParticle({ 200, 200 }, BODY);
+
+	raven::core::ResourceID ten = world.AddParticle({ 300, 300 }, BODY);
+	world.GetParticles().Lookup(ten)->inverseMass = 4.0f;
+
+	raven::core::ResourceID eleven = world.AddParticle({ 320, 300 }, BODY);
+	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+
+	raven::core::ResourceID twelve = world.AddParticle({ 340, 300 }, BODY);
+	world.GetParticles().Lookup(twelve)->inverseMass = 4.0f;
+
+	raven::core::ResourceID thriteen = world.AddParticle({ 600, 325 }, BODY);
+	world.GetParticles().Lookup(thriteen)->inverseMass = 4.0f;
+	world.GetParticles().Lookup(thriteen)->velocity = {600.0f, 0};
 	
 	world.AddAnchoredSpring(one, glm::vec2(100, 50), 1.0f, 5.0f);
 	world.AddAnchoredSpring(three, glm::vec2(150, 50), 1.0f, 5.0f);
@@ -65,10 +80,10 @@ int main()
 	world.AddSpringJoint(seven, eight, 1.0f, restLength);
 	world.AddSpringJoint(eight, nine, 1.0f, restLength);
 
-	world.AddWindForceGenerator({ 0, 200 }, { 1, 0 }, 10.0f);
+	world.AddStaticBox({ 500, 600 }, { 800, 50 }, 30);
+	world.AddStaticBox({ 800, 600 }, { 50, 800 }, 0);
 
-	raven::StaticBox box({ 350, 600 }, 800, 50);
-	box.Rotate(20);
+	Blizzard bliz({500, 500}, 80.0f, 0.25f, world);
 
 	while (window.isOpen())
 	{
@@ -94,6 +109,8 @@ int main()
 
 		accumulator += frameTime;
 
+		bliz.Update(frameTime);
+
 		/**
 		 * Update part of the game loop
 		 */
@@ -108,22 +125,28 @@ int main()
 		 /*
 		 * Render part of the game loop
 		 */
-		window.clear(sf::Color::White);
+		window.clear(sf::Color::Black);
 
 		raven::core::PackedArray<raven::Particle, 1000>& parti = world.GetParticles();
 
-		raven::core::OOBB oriented_bb = box.GetOOBB();
-		// OOBB
-		glm::vec2 p1 = oriented_bb.center - box.GetOOBB().axis[1] * oriented_bb.w_h_halfExtend.y
-			- oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
-		glm::vec2 p2 = oriented_bb.center - oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
-			+ oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
-		glm::vec2 p3 = oriented_bb.center + oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
-			+ oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
-		glm::vec2 p4 = oriented_bb.center + oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
-			- oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
+		std::vector<raven::StaticBox> scenery = world.GetScenery();
+		for (size_t i = 0; i < scenery.size(); i++)
+		{
+			raven::StaticBox& box = scenery[i];
 
-		rednerer.DrawBox(p1, p2, p3, p4, sf::Color::Green, false);
+			raven::core::OOBB oriented_bb = box.GetOOBB();
+			// OOBB
+			glm::vec2 p1 = oriented_bb.center - box.GetOOBB().axis[1] * oriented_bb.w_h_halfExtend.y
+				- oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
+			glm::vec2 p2 = oriented_bb.center - oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
+				+ oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
+			glm::vec2 p3 = oriented_bb.center + oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
+				+ oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
+			glm::vec2 p4 = oriented_bb.center + oriented_bb.axis[1] * oriented_bb.w_h_halfExtend.y
+				- oriented_bb.axis[0] * oriented_bb.w_h_halfExtend.x;
+
+			rednerer.DrawBox(p1, p2, p3, p4, sf::Color::Green, false);
+		}
 
 		std::vector<raven::SpringJoint> springs = world.GetSpringJoints();
 		for (size_t i = 0; i < springs.size(); i++)
@@ -148,7 +171,15 @@ int main()
 		for (size_t i = 0; i < parti.Size(); i++)
 		{
 			raven::Particle p = parti[i];
-			rednerer.DrawSphere(p.position, sf::Color::Red, 10.0f);
+			
+			if (p.type == BODY)
+			{
+				rednerer.DrawSphere(p.position, sf::Color::Red, 10.0f);
+			}
+			else
+			{
+				rednerer.DrawPoint(p.position, sf::Color::White);
+			}
 		}
 
 		window.display();

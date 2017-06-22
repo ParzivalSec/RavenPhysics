@@ -1,6 +1,11 @@
 ﻿#include "World.h"
 
 #include <geometric.hpp>
+#include "Manifold.h"
+#include "ScenereyManifold.h"
+
+#include "CollisionDetection.h"
+#include "CollisionResolver.h"
 
 using namespace raven;
 
@@ -40,6 +45,11 @@ void World::AddWindForceGenerator(const glm::vec2& position, const glm::vec2& di
 	m_windForceGenerator.push_back({position, direction, windStrength});
 }
 
+void World::AddStaticBox(const glm::vec2& position, const glm::vec2& extend, float rotation)
+{
+	m_scenery.push_back({ position, extend.x, extend.y, rotation });
+}
+
 void World::AddSpringJoint(core::ResourceID particleOne, core::ResourceID particleTwo, float springC, float restL)
 {
 	m_springJoints.push_back({ particleOne, particleTwo, springC, restL });
@@ -70,6 +80,75 @@ void World::Step(float deltaTime)
 		}
 
 		Integrate(particle, deltaTime);
+	}
+
+	ResolveCollisions();
+}
+
+void World::ResolveCollisions()
+{
+	// Repeat for collisionIteration times
+
+		// Check collisions among particles
+			// SphereSphere collisions between BODY particles - resolve positions
+			// PointShere collisions for PARTICLE particles - kill snowflake
+	for (size_t it = 0; it < m_worldConfiguration.collisionIterations; it++)
+	{
+		std::vector<Manifold> manifolds;
+		for (size_t i = 0; i < m_particles.Size(); i++)
+		{
+			for (size_t j = 0; j < m_particles.Size(); j++)
+			{
+				if (&m_particles[i] == &m_particles[j])
+				{
+					continue;
+				}
+
+				if (m_particles[i].type == BODY && m_particles[j].type == BODY)
+				{
+					Manifold manifold(m_particles[i], m_particles[j]);
+
+					if (coll::CircleCicle(manifold))
+					{
+						manifolds.push_back(manifold);
+					}
+				}
+			}
+		}
+
+		for (size_t i = 0; i < manifolds.size(); i++)
+		{
+			coll::ResolveCollision(manifolds[i]);
+		}
+
+		std::vector<SceneryManifold> sceneManifolds;
+		for (size_t i = 0; i < m_particles.Size(); i++)
+		{
+			for (size_t j = 0; j < m_scenery.size(); j++)
+			{
+				SceneryManifold manifold(m_particles[i], m_scenery[j]);
+
+				if (m_scenery[j].GetRotation() == 0)
+				{
+					if (coll::CircleAABB(manifold))
+					{
+						sceneManifolds.push_back(manifold);
+					}
+				}
+				else
+				{
+					if (coll::CircleOOBB(manifold))
+					{
+						sceneManifolds.push_back(manifold);
+					}
+				}
+			}
+		}
+
+		for (size_t i = 0; i < sceneManifolds.size(); i++)
+		{
+			coll::ResolveStaticCollision(sceneManifolds[i]);
+		}
 	}
 }
 

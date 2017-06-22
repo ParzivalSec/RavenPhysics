@@ -22,6 +22,7 @@ namespace raven
 		void DrawBox(const glm::vec2& pointA, const glm::vec2& pointB, const glm::vec2& pointC, const glm::vec2& pointD, const sf::Color& color, bool wireFrame);
 
 		void DrawLine(const glm::vec2& pointA, const glm::vec2& pointB, const sf::Color& color);
+		void DrawPoint(const glm::vec2& point, const sf::Color& color);
 
 	private:
 		sf::RenderWindow& m_renderWindow;
