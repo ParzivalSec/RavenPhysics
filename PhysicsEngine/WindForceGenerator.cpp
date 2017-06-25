@@ -1,5 +1,6 @@
 #include "WindForceGenerator.h"
 #include "Particle.h"
+#include <detail/func_geometric.inl>
 
 using namespace raven;
 
@@ -25,6 +26,16 @@ void WindForceGenerator::SetStrength(float strength)
 	m_windStrength = strength;
 }
 
+void WindForceGenerator::SetBounds(const glm::vec2& bounds)
+{
+	m_lower_upperBounds = bounds;
+}
+
+void WindForceGenerator::SetDistance(float distance)
+{
+	m_maxDistance = distance;
+}
+
 void WindForceGenerator::ToggleState(void)
 {
 	m_active = !m_active;
@@ -36,5 +47,11 @@ void WindForceGenerator::UpdateForce(float deltaTime, Particle* particle)
 
 	assert(particle != nullptr);
 
-	particle->forceAccumulator += m_direction * m_windStrength;
+	if (particle->position.y <= m_lower_upperBounds.y && particle->position.y >= m_lower_upperBounds.x && particle->position.x < m_position.x)
+	{
+		float distance = glm::length(particle->position - m_position);
+		float fallOffStrength = m_windStrength;
+
+		particle->forceAccumulator += m_direction * fallOffStrength;
+	}
 }

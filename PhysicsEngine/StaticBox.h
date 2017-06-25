@@ -2,6 +2,7 @@
 #include "OOBB.h"
 #include "AABB.h"
 #include "BoudingCircle.h"
+#include "Material.h"
 
 namespace raven
 {
@@ -18,6 +19,8 @@ namespace raven
 		core::AABB& GetAABB(void);
 		core::OOBB& GetOOBB(void);
 		core::BoundingCircle& GetBoundingCircle(void);
+
+		Material material;
 
 	protected:
 		void CalculateAABB();

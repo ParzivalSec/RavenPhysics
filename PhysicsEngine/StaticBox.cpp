@@ -9,6 +9,7 @@ StaticBox::StaticBox(const glm::vec2& position)
 	, m_height(100)
 	, m_rotation(0)
 	, m_center(position)
+	, material(STEEL)
 {
 	CalculateBoundingCircle();
 	CalculateAABB();
@@ -21,6 +22,7 @@ StaticBox::StaticBox(const glm::vec2& position, float width, float height)
 	, m_height(height)
 	, m_rotation(0)
 	, m_center(position)
+	, material(STEEL)
 {
 	CalculateBoundingCircle();
 	CalculateAABB();
@@ -33,12 +35,12 @@ StaticBox::StaticBox(const glm::vec2& position, float width, float height, float
 	, m_height(height)
 	, m_rotation(rotation)
 	, m_center(position)
+	, material(STEEL)
 {
 	CalculateBoundingCircle();
 	CalculateAABB();
 	CalculateOOBB();
 }
-
 
 void StaticBox::Rotate(float angle)
 {

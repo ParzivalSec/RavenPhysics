@@ -14,6 +14,7 @@ Particle::Particle()
 	, lifeTime(10.0f)
 	, restitution(2.0f)
 	, radius(10.0f)
+	, material(STEEL)
 {}
 
 Particle::Particle(glm::vec2 position)
@@ -28,6 +29,7 @@ Particle::Particle(glm::vec2 position)
 	, lifeTime(10.0f)
 	, restitution(2.0f)
 	, radius(10.0f)
+	, material(STEEL)
 {}
 
 Particle::Particle(glm::vec2 position, TYPE type) 
@@ -42,6 +44,7 @@ Particle::Particle(glm::vec2 position, TYPE type)
 	, lifeTime(10.0f)
 	, restitution(2.0f)
 	, radius(10.0f)
+	, material(STEEL)
 {}
 
 Particle::Particle(glm::vec2 position, glm::vec2 velocity, TYPE type)
@@ -57,4 +60,5 @@ Particle::Particle(glm::vec2 position, glm::vec2 velocity, TYPE type)
 	, lifeTime(10.0f)
 	, restitution(2.0f)
 	, radius(10.0f)
+	, material(STEEL)
 {}

@@ -9,5 +9,5 @@ GravityForceGenerator::GravityForceGenerator(const WorldConfiguration& worldConf
 
 void GravityForceGenerator::ApplyForceTo(Particle& particle)
 {
-	particle.forceAccumulator += particle.inverseMass * m_gravity;
+	particle.acceleration = m_gravity;
 }

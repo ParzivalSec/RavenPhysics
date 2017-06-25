@@ -74,6 +74,9 @@
     <Filter Include="Engine\Collisions\CollisionResolution">
       <UniqueIdentifier>{108e15b0-72df-494a-b59c-54f143296355}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PHS_Application\Controller">
+      <UniqueIdentifier>{d6f7e368-0895-43e1-9eb0-588629bfb4db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -117,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="CollisionResolver.cpp">
       <Filter>Engine\Collisions\CollisionResolution</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneController.cpp">
+      <Filter>PHS_Application\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +185,15 @@
     </ClInclude>
     <ClInclude Include="CollisionResolver.h">
       <Filter>Engine\Collisions\CollisionResolution</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Engine\Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneController.h">
+      <Filter>PHS_Application\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneConfig.h">
+      <Filter>PHS_Application\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

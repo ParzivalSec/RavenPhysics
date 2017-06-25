@@ -154,6 +154,7 @@
     <ClCompile Include="FreeList.cpp" />
     <ClCompile Include="GravityForceGenerator.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="SceneController.cpp" />
     <ClCompile Include="SpringJoint.cpp" />
     <ClCompile Include="StaticBox.cpp" />
     <ClCompile Include="WindForceGenerator.cpp" />
@@ -171,9 +172,12 @@
     <ClInclude Include="FreeList.h" />
     <ClInclude Include="GravityForceGenerator.h" />
     <ClInclude Include="Manifold.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="OOBB.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="PackedArray.h" />
+    <ClInclude Include="SceneConfig.h" />
+    <ClInclude Include="SceneController.h" />
     <ClInclude Include="ScenereyManifold.h" />
     <ClInclude Include="SpringJoint.h" />
     <ClInclude Include="StaticBox.h" />

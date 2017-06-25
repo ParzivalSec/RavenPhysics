@@ -36,6 +36,6 @@ void SpringJoint::UpdateForce(float deltaTime, World& world)
 
 	force = glm::normalize(force);
 	force *= -magnitude;
-	particleOne->forceAccumulator += force;
-	particleTwo->forceAccumulator += -force;
+	particleOne->forceAccumulator += force * 0.5f;
+	particleTwo->forceAccumulator += -force * 0.5f;
 }

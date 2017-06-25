@@ -5,6 +5,8 @@
 
 #include <gtx/matrix_transform_2d.hpp>
 #include <detail/func_geometric.hpp>
+#include <ostream>
+#include <iostream>
 
 bool raven::coll::PointCircle(Manifold& m)
 {
@@ -12,7 +14,7 @@ bool raven::coll::PointCircle(Manifold& m)
 	Particle& B = m.B;
 
 	float dist = glm::length(B.position - A.position);
-	return dist <= A.radius;
+	return dist - A.radius <= B.radius;
 }
 
 bool raven::coll::CircleCicle(Manifold& m)
@@ -31,7 +33,7 @@ bool raven::coll::CircleCicle(Manifold& m)
 		return false;
 	}
 
-	if (dist != 0)
+	if (dist != 0.0f)
 	{
 		m.penetrationDepth = rad - dist;
 		// INFO: Recheck this in simulation
@@ -79,6 +81,7 @@ bool raven::coll::CircleOOBB(SceneryManifold& m)
 	oobbTrans = glm::rotate(oobbTrans, glm::radians(m.B.GetRotation()));
 	oobbTrans = glm::translate(oobbTrans, B.center);
 
+	// TODO: Remove me and move to oobb
 	glm::mat3 invBoxMatrix = glm::inverse(oobbTrans);
 	glm::vec2 transformedCircleCenter = invBoxMatrix * glm::vec3(A.position, 1.0f);
 	glm::vec2 transformedBoxCenter = invBoxMatrix * glm::vec3(B.center, 1.0f);
@@ -92,6 +95,12 @@ bool raven::coll::CircleOOBB(SceneryManifold& m)
 
 	if (dist > A.radius)
 	{
+		return false;
+	}
+	else if (dist == 0.0f)
+	{
+		// INFO: Somehow check how this is handles in real collision detection engines
+		A.position += glm::normalize(-A.velocity) * 10.0f;
 		return false;
 	}
 

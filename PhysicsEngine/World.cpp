@@ -7,6 +7,8 @@
 #include "CollisionDetection.h"
 #include "CollisionResolver.h"
 
+#include <intrin.h>
+
 using namespace raven;
 
 World::World(const WorldConfiguration& worldConfiguration)
@@ -41,14 +43,16 @@ void World::AddAnchoredSpring(core::ResourceID particle, const glm::vec2& anchor
 	m_anchoredSprings.push_back({anchor, particle, springC, restL});
 }
 
-void World::AddWindForceGenerator(const glm::vec2& position, const glm::vec2& direction, float windStrength)
+WindForceGenerator& World::AddWindForceGenerator(const glm::vec2& position, const glm::vec2& direction, float windStrength)
 {
 	m_windForceGenerator.push_back({position, direction, windStrength});
+	return m_windForceGenerator.back();
 }
 
-void World::AddStaticBox(const glm::vec2& position, const glm::vec2& extend, float rotation)
+StaticBox& World::AddStaticBox(const glm::vec2& position, const glm::vec2& extend, float rotation)
 {
 	m_scenery.push_back({ position, extend.x, extend.y, rotation });
+	return m_scenery.back();
 }
 
 void World::AddSpringJoint(core::ResourceID particleOne, core::ResourceID particleTwo, float springC, float restL)
@@ -134,7 +138,8 @@ void World::ResolveCollisions()
 						manifolds.push_back(manifold);
 					}
 				}
-				else
+				
+				if (m_particles[i].type + m_particles[j].type == 1)
 				{
 					Particle& part = m_particles[i].type == PARTICLE ? m_particles[i] : m_particles[j];
 					Particle& body = m_particles[j].type == BODY ? m_particles[j] : m_particles[i];
@@ -143,7 +148,7 @@ void World::ResolveCollisions()
 
 					if (coll::PointCircle(manifold))
 					{
-						
+						part.lifeTime = 0.0f;
 					}
 				}
 			}
@@ -206,4 +211,5 @@ void World::Integrate(Particle& particle, float deltaTime)
 
 	// Clear the forces
 	particle.forceAccumulator = { 0, 0 };
+	//particle.acceleration = { 0, 0 };
 }

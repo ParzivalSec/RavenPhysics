@@ -9,6 +9,7 @@
 #include "StaticBox.h"
 #include "Blizzard.h"
 #include <iostream>
+#include "SceneController.h"
 
 int main()
 {
@@ -32,79 +33,89 @@ int main()
 
 	raven::WorldConfiguration worldConfig;
 	worldConfig.maxParticles = 100000;
-	worldConfig.gravitation = { 0.0f, 9.81f };
+	worldConfig.gravitation = { 0.0f, 100.9f };
 	worldConfig.collisionIterations = 5;
 
-	raven::World world(worldConfig);
-	raven::core::ResourceID one = world.AddParticle({ 100, 100 }, BODY);
-	raven::core::ResourceID two = world.AddParticle({ 100, 150 }, BODY);
-	raven::core::ResourceID three = world.AddParticle({ 150, 100 }, BODY);
-	raven::core::ResourceID four = world.AddParticle({ 150, 150 }, BODY);
-	raven::core::ResourceID five = world.AddParticle({ 200, 100 }, BODY);
-	raven::core::ResourceID six = world.AddParticle({ 200, 150 }, BODY);
-	raven::core::ResourceID seven = world.AddParticle({ 100, 200 }, BODY);
-	raven::core::ResourceID eight = world.AddParticle({ 150, 200 }, BODY);
-	raven::core::ResourceID nine = world.AddParticle({ 200, 200 }, BODY);
+	//raven::World world(worldConfig);
+	//raven::core::ResourceID one = world.AddParticle({ 100, 100 }, BODY);
+	//raven::core::ResourceID two = world.AddParticle({ 100, 150 }, BODY);
+	//raven::core::ResourceID three = world.AddParticle({ 150, 100 }, BODY);
+	//raven::core::ResourceID four = world.AddParticle({ 150, 150 }, BODY);
+	//raven::core::ResourceID five = world.AddParticle({ 200, 100 }, BODY);
+	//raven::core::ResourceID six = world.AddParticle({ 200, 150 }, BODY);
+	//raven::core::ResourceID seven = world.AddParticle({ 100, 200 }, BODY);
+	//raven::core::ResourceID eight = world.AddParticle({ 150, 200 }, BODY);
+	//raven::core::ResourceID nine = world.AddParticle({ 200, 200 }, BODY);
 
-	raven::core::ResourceID ten = world.AddParticle({ 300, 300 }, BODY);
-	world.GetParticles().Lookup(ten)->inverseMass = 4.0f;
+	//raven::core::ResourceID ten = world.AddParticle({ 300, 300 }, BODY);
+	//world.GetParticles().Lookup(ten)->inverseMass = 4.0f;
 
-	raven::core::ResourceID eleven = world.AddParticle({ 320, 300 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//raven::core::ResourceID eleven = world.AddParticle({ 320, 300 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
 
-	raven::core::ResourceID twelve = world.AddParticle({ 340, 300 }, BODY);
-	world.GetParticles().Lookup(twelve)->inverseMass = 4.0f;
+	//raven::core::ResourceID twelve = world.AddParticle({ 340, 300 }, BODY);
+	//world.GetParticles().Lookup(twelve)->inverseMass = 4.0f;
 
-	raven::core::ResourceID thriteen = world.AddParticle({ 600, 325 }, BODY);
-	world.GetParticles().Lookup(thriteen)->inverseMass = 4.0f;
-	world.GetParticles().Lookup(thriteen)->velocity = {600.0f, 0};
-	
-	world.AddAnchoredSpring(one, glm::vec2(100, 50), 1.0f, 5.0f);
-	world.AddAnchoredSpring(three, glm::vec2(150, 50), 1.0f, 5.0f);
-	world.AddAnchoredSpring(five, glm::vec2(200, 50), 1.0f, 5.0f);
+	//raven::core::ResourceID thriteen = world.AddParticle({ 600, 325 }, BODY);
+	//world.GetParticles().Lookup(thriteen)->inverseMass = 4.0f;
+	//world.GetParticles().Lookup(thriteen)->velocity = {600.0f, 0};
+	//
+	//world.AddAnchoredSpring(one, glm::vec2(100, 50), 10.0f, 2.0f);
+	//world.AddAnchoredSpring(three, glm::vec2(150, 50), 10.0f, 2.0f);
+	//world.AddAnchoredSpring(five, glm::vec2(200, 50), 10.0f, 2.0f);
 
-	float restLength = 35.0f;
+	//float springConstant = 10.0f;
+	//float restLength = 35.0f;
 
-	world.AddSpringJoint(one, two, 1.0f, restLength);
-	world.AddSpringJoint(two, seven, 1.0f, restLength);
-	world.AddSpringJoint(three, four, 1.0f, restLength);
-	world.AddSpringJoint(four, eight, 1.0f, restLength);
-	world.AddSpringJoint(five, six, 1.0f, restLength);
-	world.AddSpringJoint(six, nine, 1.0f, restLength);
+	//world.AddSpringJoint(one, two, springConstant, restLength);
+	//world.AddSpringJoint(two, seven, springConstant, restLength);
+	//world.AddSpringJoint(three, four, springConstant, restLength);
+	//world.AddSpringJoint(four, eight, springConstant, restLength);
+	//world.AddSpringJoint(five, six, springConstant, restLength);
+	//world.AddSpringJoint(six, nine, springConstant, restLength);
 
-	world.AddSpringJoint(one, three, 1.0f, restLength);
-	world.AddSpringJoint(three, five, 1.0f, restLength);
+	//world.AddSpringJoint(one, three, springConstant, restLength);
+	//world.AddSpringJoint(three, five, springConstant, restLength);
 
-	world.AddSpringJoint(two, four, 1.0f, restLength);
-	world.AddSpringJoint(four, six, 1.0f, restLength);
+	//world.AddSpringJoint(two, four, 1.0f, restLength);
+	//world.AddSpringJoint(four, six, 1.0f, restLength);
 
-	world.AddSpringJoint(seven, eight, 1.0f, restLength);
-	world.AddSpringJoint(eight, nine, 1.0f, restLength);
+	//world.AddSpringJoint(seven, eight, 1.0f, restLength);
+	//world.AddSpringJoint(eight, nine, 1.0f, restLength);
 
-	world.AddStaticBox({ 300, 600 }, { 800, 50 }, 30);
-	world.AddStaticBox({ 600, 710 }, { 1600, 25 }, 0);
+	//world.AddStaticBox({ 200, 400 }, { 600, 25 }, 40);
+	//world.AddStaticBox({ 600, 710 }, { 1600, 25 }, 0);
 
-	eleven = world.AddParticle({ 800, 500 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
-	eleven = world.AddParticle({ 780, 500 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
-	eleven = world.AddParticle({ 820, 500 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
-	eleven = world.AddParticle({ 790, 600 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
-	eleven = world.AddParticle({ 820, 500 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//eleven = world.AddParticle({ 800, 500 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//eleven = world.AddParticle({ 780, 500 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//eleven = world.AddParticle({ 820, 500 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//eleven = world.AddParticle({ 790, 600 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//eleven = world.AddParticle({ 820, 500 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
 
-	eleven = world.AddParticle({ 0, 50 }, BODY);
-	world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
-	world.GetParticles().Lookup(eleven)->velocity = { 200.0f, 0 };
+	//eleven = world.AddParticle({ 0, 50 }, BODY);
+	//world.GetParticles().Lookup(eleven)->inverseMass = 4.0f;
+	//world.GetParticles().Lookup(eleven)->velocity = { 200.0f, 0 };
 
-	world.AddStaticBox({ 800, 410 }, { 200, 25 }, 0);
-	world.AddStaticBox({ 675, 710 }, { 25, 300 }, 0);
-	world.AddStaticBox({ 925, 710 }, { 25, 300 }, 0);
+	//world.AddStaticBox({ 800, 410 }, { 200, 25 }, 0);
+	//world.AddStaticBox({ 675, 710 }, { 25, 300 }, 0);
+	//world.AddStaticBox({ 925, 710 }, { 25, 300 }, 0);
 
-	Blizzard bliz({500, 200}, 300.0f, 0.1f, world);
-	Blizzard bliz2({800, 100}, 300.0f, 0.1f, world);
+	//raven::WindForceGenerator& f = world.AddWindForceGenerator({ 800, 300 }, { -1, 0 }, 100.0f);
+	//f.SetBounds({ 100, 300 });
+	//f.SetDistance(500);
+
+	//Blizzard bliz({500, 200}, 300.0f, 0.1f, world);
+	//Blizzard bliz2({800, 100}, 300.0f, 0.1f, world);
+
+	SceneController scene(worldConfig);
+
+	SceneConfig config;
+	scene.CreateScene(config);
 
 	while (window.isOpen())
 	{
@@ -118,6 +129,36 @@ int main()
 			{
 				window.close();
 			}
+
+			if (event.type == sf::Event::KeyReleased)
+			{
+				if (event.key.code == sf::Keyboard::Key::Right)
+				{
+					scene.RotateBoxRight();
+				}
+
+				if (event.key.code == sf::Keyboard::Key::Left)
+				{
+					scene.RotateBoxLeft();
+				}
+
+				if (event.key.code == sf::Keyboard::Key::R)
+				{
+					scene.CreateScene(config);
+				}
+
+				if (event.key.code == sf::Keyboard::Key::Space)
+				{
+					scene.GetWindForceGenerator().back().ToggleState();
+				}
+			}
+
+			if (event.type == sf::Event::MouseButtonReleased)
+			{
+				float x = event.mouseButton.x;
+				float y = event.mouseButton.y;
+				scene.AddBall(x, y);
+			}
 		}
 		float newTime = clock.GetElapsedTime().count();
 		float frameTime = newTime - currentTime;
@@ -130,9 +171,6 @@ int main()
 
 		accumulator += frameTime;
 
-		bliz.Update(frameTime);
-		bliz2.Update(frameTime);
-
 		/**
 		 * Update part of the game loop
 		 */
@@ -140,7 +178,7 @@ int main()
 		{
 
 			// Update physic world
-			world.Step(dt);
+			scene.UpdateWorld(dt);
 			t += dt;
 			accumulator -= dt;
 		}
@@ -149,11 +187,11 @@ int main()
 		 */
 		window.clear(sf::Color::Black);
 
-		raven::core::PackedArray<raven::Particle, 5000>& parti = world.GetParticles();
+		raven::core::PackedArray<raven::Particle, 5000>& parti = scene.GetWorldParticles();
 
-		std::cout << parti.Size() << std::endl;
+		//std::cout << parti.Size() << std::endl;
 
-		std::vector<raven::StaticBox>& scenery = world.GetScenery();
+		std::vector<raven::StaticBox>& scenery = scene.GetWorldScenery();
 		for (size_t i = 0; i < scenery.size(); i++)
 		{
 			raven::StaticBox& box = scenery[i];
@@ -172,7 +210,7 @@ int main()
 			rednerer.DrawBox(p1, p2, p3, p4, sf::Color::Green, false);
 		}
 
-		std::vector<raven::SpringJoint>& springs = world.GetSpringJoints();
+		std::vector<raven::SpringJoint>& springs = scene.GetSprings();
 		for (size_t i = 0; i < springs.size(); i++)
 		{
 			raven::SpringJoint& spring = springs[i];
@@ -182,7 +220,7 @@ int main()
 			rednerer.DrawLine(p1->position, p2->position, sf::Color::Red);
 		}
 
-		std::vector<raven::AnchoredSpring>& anchoredSprings = world.GetAnchoredSprings();
+		std::vector<raven::AnchoredSpring>& anchoredSprings = scene.GetAnchoredSprings();
 		for (size_t i = 0; i < anchoredSprings.size(); i++)
 		{
 			raven::AnchoredSpring& spring = anchoredSprings[i];
@@ -192,13 +230,34 @@ int main()
 			rednerer.DrawLine(p1->position, spring.GetAnchor(), sf::Color::Blue);
 		}
 
+		std::vector<raven::WindForceGenerator>& windForces = scene.GetWindForceGenerator();
+		for (size_t i = 0; i < windForces.size(); i++)
+		{
+			raven::WindForceGenerator& windForce = windForces[i];
+
+			glm::vec2 p1 = { windForce.GetPosition().x - 10.0f, windForce.m_lower_upperBounds.x };
+			glm::vec2 p2 = { windForce.GetPosition().x + 10.0f, windForce.m_lower_upperBounds.x };
+			glm::vec2 p3 = { windForce.GetPosition().x + 10.0f, windForce.m_lower_upperBounds.y };
+			glm::vec2 p4 = { windForce.GetPosition().x - 10.0f, windForce.m_lower_upperBounds.y };
+
+			rednerer.DrawBox(p1, p2, p3, p4, sf::Color::Yellow, true);
+
+		}
+
 		for (size_t i = 0; i < parti.Size(); i++)
 		{
 			raven::Particle p = parti[i];
 			
 			if (p.type == BODY)
 			{
-				rednerer.DrawSphere(p.position, sf::Color::Red, 10.0f);
+				if (p.material == raven::STEEL)
+				{
+					rednerer.DrawSphere(p.position, sf::Color::Cyan, p.radius);
+				}
+				else if (p.material == raven::STEEL_LUBRICATED)
+				{
+					rednerer.DrawSphere(p.position, sf::Color::Magenta, p.radius);
+				}
 			}
 			else
 			{

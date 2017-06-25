@@ -29,6 +29,8 @@ void Blizzard::Update(float deltaTime)
 		raven::core::ResourceID id = m_world.AddParticle(m_position, {0, 0}, PARTICLE);
 		raven::Particle* part = m_world.GetParticles().Lookup(id);
 		part->velocity = force * m_strength;
+		part->radius = 2.0f;
+		part->lifeTime = 20.0f;
 
 		// Adjust next iteration emit direction
 		m_currentEmitAngle += m_sectorAngle;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vec2.hpp>
+#include "Material.h"
 
 enum TYPE
 {
@@ -39,5 +40,7 @@ namespace raven
 		float lifeTime;
 		float restitution;
 		float radius;
+
+		Material material;
 	};
 }
